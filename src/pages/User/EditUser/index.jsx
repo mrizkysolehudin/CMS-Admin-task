@@ -3,6 +3,7 @@ import Navbar from "../../../components/Global/Navbar";
 import axiosClient from "../../../helpers/axiosClient";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import InputComponent from "../../../components/User/InputComponent";
 
 const EditUserPage = () => {
 	const { id } = useParams();
@@ -97,7 +98,7 @@ const EditUserPage = () => {
 			<Navbar />
 
 			<div className="min-h-screen flex items-center justify-center bg-indigo-200 pb-2 px-4 sm:px-6 lg:px-8">
-				<div className="max-w-md w-full space-y-8">
+				<div className="max-w-md w-full space-y-8 -mt-10">
 					<div className="flex justify-center items-center gap-4">
 						<img
 							className="h-12 w-auto"
@@ -112,37 +113,18 @@ const EditUserPage = () => {
 						<form className="space-y-4" onSubmit={handleUpdate}>
 							<div className="rounded-md shadow-sm -space-y-px">
 								<div className="grid gap-6">
-									<div className="col-span-12">
-										<label
-											htmlFor="first_name"
-											className="block text-sm font-medium text-gray-700">
-											Nama
-										</label>
-										<input
-											type="text"
-											name="name"
-											value={newUser.name}
-											onChange={handleChange}
-											id="first_name"
-											autoComplete="given-name"
-											className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										/>
-									</div>
-									<div className="col-span-12">
-										<label
-											htmlFor="address"
-											className="block text-sm font-medium text-gray-700">
-											Alamat
-										</label>
-										<input
-											type="text"
-											name="address"
-											value={newUser.address}
-											onChange={handleChange}
-											id="address"
-											className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										/>
-									</div>
+									<InputComponent
+										label="Nama"
+										type="text"
+										value={newUser.name}
+										handleChange={handleChange}
+									/>
+									<InputComponent
+										label="Alamat"
+										type="text"
+										value={newUser.address}
+										handleChange={handleChange}
+									/>
 
 									<div className="col-span-12">
 										<div className="main flex border shadow-sm border-gray-300 rounded-full overflow-hidden m-4 select-none">
