@@ -20,7 +20,7 @@ const HomePage = () => {
 			.get("/user")
 			.then((res) => {
 				setLoading(false);
-				setUsers(res.data.data);
+				setUsers(res?.data?.data);
 			})
 			.catch((err) => {
 				setLoading(false);
@@ -71,8 +71,14 @@ const HomePage = () => {
 							<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-indigo-900 text-white ">
 								<div className="rounded-t mb-0 px-4 py-3 border-0 ">
 									<div className="flex flex-wrap items-center">
-										<div className="relative w-full px-4 max-w-full flex-grow flex-1 ">
+										<div className="relative w-full px-4 max-w-full flex justify-between ">
 											<h3 className="font-semibold text-lg text-white">CMS Admin </h3>
+
+											<Link
+												to="/user"
+												className="bg-green-700 hover:bg-green-800 px-2 pb-0.5 rounded">
+												Tambah User
+											</Link>
 										</div>
 									</div>
 								</div>

@@ -4,11 +4,10 @@ import axiosClient from "../../../helpers/axiosClient";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const EditUserPage = () => {
+const AddUserPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 
-	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
 	const [newUser, setNewUser] = useState({
 		name: "",
@@ -17,21 +16,6 @@ const EditUserPage = () => {
 		born_date: "",
 	});
 
-	useEffect(() => {
-		getUsers(id);
-	}, [id]);
-
-	useEffect(() => {
-		if (user) {
-			setNewUser({
-				name: user.name,
-				address: user.address,
-				gender: user.gender,
-				born_date: user.born_date,
-			});
-		}
-	}, [user]);
-
 	const handleChange = (e) => {
 		setNewUser({
 			...newUser,
@@ -39,21 +23,7 @@ const EditUserPage = () => {
 		});
 	};
 
-	const getUsers = async (id) => {
-		setIsLoading(true);
-		await axiosClient()
-			.get(`/user/${id}`)
-			.then((res) => {
-				setIsLoading(false);
-				setUser(res?.data?.data);
-			})
-			.catch((err) => {
-				setIsLoading(false);
-				throw err;
-			});
-	};
-
-	const handleUpdate = async (e) => {
+	const handleAddUser = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 
@@ -71,12 +41,12 @@ const EditUserPage = () => {
 		}
 
 		try {
-			const response = await axiosClient().put(`/user/${id}`, newUser);
+			const response = await axiosClient().post(`/user`, newUser);
 
 			if (response.data) {
 				setIsLoading(false);
 				Swal.fire({
-					text: "Update user success.",
+					text: "Add user success.",
 					icon: "success",
 				});
 			}
@@ -86,7 +56,7 @@ const EditUserPage = () => {
 		} catch (error) {
 			setIsLoading(false);
 			Swal.fire({
-				text: "Update user error.",
+				text: "Add user error.",
 				icon: "error",
 			});
 		}
@@ -105,11 +75,11 @@ const EditUserPage = () => {
 							alt="Workflow"
 						/>
 						<h2 className=" text-center text-3xl font-extrabold text-indigo-600">
-							Edit User
+							Tambah User
 						</h2>
 					</div>
 					<div className=" bg-white max-w-md rounded overflow-hidden shadow-xl p-5">
-						<form className="space-y-4" onSubmit={handleUpdate}>
+						<form className="space-y-4" onSubmit={handleAddUser}>
 							<div className="rounded-md shadow-sm -space-y-px">
 								<div className="grid gap-6">
 									<div className="col-span-12">
@@ -193,7 +163,7 @@ const EditUserPage = () => {
 									disabled={isLoading}
 									type="submit"
 									className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-									Update
+									Add
 								</button>
 							</div>
 						</form>
@@ -204,4 +174,4 @@ const EditUserPage = () => {
 	);
 };
 
-export default EditUserPage;
+export default AddUserPage;
