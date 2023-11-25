@@ -97,10 +97,10 @@ const HomePage = () => {
 																{user?.gender === "l" ? "Pria" : "Wanita"}
 															</td>
 															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-																{formatDate(user?.born_date, false)}
+																{formatDate(user?.born_date, { withDot: true })}
 															</td>
 															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-																{formatDate(user?.created_at)}
+																{formatDate(user?.created_at, { includeTime: true })}
 															</td>
 															<td className="relative flex justify-center  border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-7 text-right">
 																<div className=" py-1 px-3 gap-x-3 flex text-sm">
