@@ -1,12 +1,12 @@
 import React from "react";
 
-const InputComponent = ({ value, handleChange, label, type }) => {
+const Input = ({ value, handleChange, label, type, name }) => {
 	return (
 		<div className="col-span-12">
 			<label className="block text-sm font-medium text-gray-700">{label}</label>
 			<input
 				type={type}
-				name="name"
+				name={name}
 				value={value}
 				onChange={handleChange}
 				autoComplete="given-name"
@@ -16,4 +16,4 @@ const InputComponent = ({ value, handleChange, label, type }) => {
 	);
 };
 
-export default InputComponent;
+export default Input;

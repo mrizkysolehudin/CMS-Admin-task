@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "../../../components/Global/Navbar";
 import axiosClient from "../../../helpers/axiosClient";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import Input from "../../../components/User/Input";
+import Button from "../../../components/User/Button";
 
 const AddUserPage = () => {
-	const { id } = useParams();
 	const navigate = useNavigate();
 
 	const [isLoading, setIsLoading] = useState(false);
@@ -83,38 +84,20 @@ const AddUserPage = () => {
 						<form className="space-y-4" onSubmit={handleAddUser}>
 							<div className="rounded-md shadow-sm -space-y-px">
 								<div className="grid gap-6">
-									<div className="col-span-12">
-										<label
-											htmlFor="first_name"
-											className="block text-sm font-medium text-gray-700">
-											Nama
-										</label>
-										<input
-											type="text"
-											name="name"
-											value={newUser.name}
-											onChange={handleChange}
-											id="first_name"
-											autoComplete="given-name"
-											className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										/>
-									</div>
-									<div className="col-span-12">
-										<label
-											htmlFor="address"
-											className="block text-sm font-medium text-gray-700">
-											Alamat
-										</label>
-										<input
-											type="text"
-											name="address"
-											value={newUser.address}
-											onChange={handleChange}
-											id="address"
-											className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-										/>
-									</div>
-
+									<Input
+										label="Nama"
+										name="name"
+										type="text"
+										value={newUser.name}
+										handleChange={handleChange}
+									/>
+									<Input
+										label="Alamat"
+										name="address"
+										type="text"
+										value={newUser.address}
+										handleChange={handleChange}
+									/>
 									<div className="col-span-12">
 										<div className="main flex border shadow-sm border-gray-300 rounded-full overflow-hidden m-4 select-none">
 											<div className=" py-3 my-auto px-5 bg-blue-500 text-white text-sm font-semibold mr-3">
@@ -160,12 +143,7 @@ const AddUserPage = () => {
 							</div>
 
 							<div className="pt-6">
-								<button
-									disabled={isLoading}
-									type="submit"
-									className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-									{isLoading ? "Loading..." : "Add"}
-								</button>
+								<Button isLoading={isLoading} text="Add" />
 							</div>
 						</form>
 					</div>
