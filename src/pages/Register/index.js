@@ -7,7 +7,11 @@ import Swal from "sweetalert2";
 const RegisterPage = () => {
 	const navigate = useNavigate();
 
-	const [data, setData] = useState(null);
+	const [data, setData] = useState({
+		name: "",
+		email: "",
+		password: "",
+	});
 
 	const handleChange = (e) => {
 		setData({
@@ -18,6 +22,18 @@ const RegisterPage = () => {
 
 	const handleRegister = async (e) => {
 		e.preventDefault();
+		if (!data?.name.trim() || !data?.email.trim() || !data?.password.trim()) {
+			return Swal.fire({
+				text: "Input is empty",
+				icon: "error",
+			});
+		} else if (data?.name.length < 8 || data?.password.length < 8) {
+			return Swal.fire({
+				text: "Name and Password must be more than 8 characters",
+				icon: "error",
+			});
+		}
+
 		try {
 			const response = await axiosClient().post("/auth/register", data);
 

@@ -1,10 +1,9 @@
 # CMS Admin
 
-<br />
-
 ## Built with
 
 - React JS
+- TailwindCSS
 
 ## Environment Variables
 
@@ -17,19 +16,19 @@ REACT_APP_API_URL=
 Clone the project
 
 ```bash
-  git clone link-to-myproject my-project
+  git clone https://github.com/mrizkysolehudin/taskSanber cmsadmin-app
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd cmsadmin-app
 ```
 
-Add the environment variables to .env file
+Add the environment variables from .env.example file to .env file
 
 ```bash
-  REACT_APP_API_URL=
+  REACT_APP_API_URL=https://cms-admin-v2.ihsansolusi.co.id/testapi
 ```
 
 Install dependencies
@@ -43,8 +42,6 @@ Start the project
 ```bash
   npm start
 ```
-
-## Screenshots
 
 ## Author
 

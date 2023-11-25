@@ -13,13 +13,18 @@ export const formatDate = (date, detail = {}) => {
 		minute: includeTime ? "numeric" : undefined,
 	};
 
+	let formattedNewDate = newDate.toLocaleDateString("in-IN", options);
 	if (includeTime) {
-		return newDate.toLocaleDateString("in-GB", options).split(",").join("");
+		formattedNewDate = newDate
+			.toLocaleDateString("in-IN", options)
+			.replace(/,/g, "")
+			.replace(/\./g, ":");
 	}
 
-	let formattedNewDate = newDate.toLocaleDateString("in-GB", options);
 	if (withDot) {
-		return formattedNewDate.replace(/(\s\w+)$/, ".$1");
+		formattedNewDate = newDate
+			.toLocaleDateString("in-IN", options)
+			.replace(/(\s\w+)$/, ".$1");
 	}
 
 	return formattedNewDate;

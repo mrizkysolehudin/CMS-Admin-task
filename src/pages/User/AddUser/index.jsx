@@ -27,15 +27,16 @@ const AddUserPage = () => {
 		e.preventDefault();
 		setIsLoading(true);
 
-		if (
-			!newUser.name.trim() ||
-			!newUser.address.trim() ||
-			!newUser.gender.trim() ||
-			!newUser.born_date.trim()
-		) {
+		if (!newUser.name.trim() || !newUser.born_date.trim()) {
 			setIsLoading(false);
 			return Swal.fire({
-				text: "Input is empty",
+				text: "Name and Born date is required",
+				icon: "error",
+			});
+		} else if (newUser.name.length <= 8) {
+			setIsLoading(false);
+			return Swal.fire({
+				text: "Name must be more than 8 characters",
 				icon: "error",
 			});
 		}
