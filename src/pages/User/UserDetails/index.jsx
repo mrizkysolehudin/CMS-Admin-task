@@ -3,6 +3,7 @@ import Navbar from "../../../components/Global/Navbar";
 import axiosClient from "../../../helpers/axiosClient";
 import { useParams } from "react-router-dom";
 import { formatDate } from "../../../utils/formatDate";
+import Alert from "../../../components/Global/Alert";
 
 const UserDetailsPage = () => {
 	const { id } = useParams();
@@ -41,9 +42,7 @@ const UserDetailsPage = () => {
 					style={{ fontFamily: "Montserrat" }}
 					className=" flex font-medium justify-center min-h-[63dvh]">
 					{isLoading ? (
-						<div>
-							<p>Loading...</p>
-						</div>
+						<Alert text="Loading..." />
 					) : !!user ? (
 						<article className="w-64 mx-auto text-gray-300 bg-indigo-900 rounded-2xl h-min px-8 py-6 shadow-lg">
 							<div className=" ">
@@ -72,9 +71,7 @@ const UserDetailsPage = () => {
 							</div>
 						</article>
 					) : (
-						<div className="text-right w-full h-20 ">
-							<p>No data</p>
-						</div>
+						<Alert />
 					)}
 				</section>
 			</main>

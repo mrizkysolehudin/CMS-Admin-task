@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
 import Footer from "../../components/Global/Footer";
 import Swal from "sweetalert2";
+import Alert from "../../components/Global/Alert";
 
 const HomePage = () => {
 	const [users, setUsers] = useState([]);
@@ -112,9 +113,7 @@ const HomePage = () => {
 
 										<tbody className={`relative }`}>
 											{loading ? (
-												<tr>
-													<td>Loading...</td>
-												</tr>
+												<Alert isTable text="Loading..." />
 											) : users?.length > 0 ? (
 												users?.map((user, index) => {
 													return (
@@ -160,9 +159,7 @@ const HomePage = () => {
 													);
 												})
 											) : (
-												<tr className="text-right w-full h-20 ">
-													<td colSpan="4">No data</td>
-												</tr>
+												<Alert isTable />
 											)}
 										</tbody>
 									</table>
