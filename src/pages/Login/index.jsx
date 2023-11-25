@@ -57,8 +57,8 @@ const LoginPage = () => {
 								Don't have an account ?{" "}
 								<Link
 									to="/register"
-									className="cursor-pointer text-indigo-600 hover:text-indigo-800">
-									Register
+									className="cursor-pointer underline text-indigo-600 hover:text-indigo-800">
+									Register here
 								</Link>
 							</div>
 						</div>

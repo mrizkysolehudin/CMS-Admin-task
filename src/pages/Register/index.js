@@ -1,5 +1,6 @@
 import React from "react";
 import AuthSVG from "../../assets/images/AuthSVG";
+import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
 	return (
@@ -74,6 +75,12 @@ const RegisterPage = () => {
 										Register Now
 									</button>
 								</div>
+							</div>
+							<div className="float-right text-black text-sm -mt-2">
+								<span> Already have an account? </span>
+								<Link to="/login" className="text-indigo-500 underline">
+									Login here
+								</Link>
 							</div>
 						</div>
 					</div>
