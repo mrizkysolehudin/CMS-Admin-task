@@ -5,6 +5,7 @@ import axiosClient from "../../helpers/axiosClient";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
+import Footer from "../../components/Global/Footer";
 
 const HomePage = () => {
 	const [users, setUsers] = useState([]);
@@ -74,24 +75,26 @@ const HomePage = () => {
 											</tr>
 										</thead>
 
-										<tbody className={`relative ${users ? "h-[14vh]" : ""}`}>
+										<tbody className={`relative }`}>
 											{loading ? (
-												"loading"
+												<tr>
+													<td>Loading...</td>
+												</tr>
 											) : users?.length > 0 ? (
 												users?.map((user, index) => {
 													return (
-														<tr className="hover:bg-indigo-400/90 bg-indigo-400">
-															<th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+														<tr key={index} className="hover:bg-indigo-400/90 bg-indigo-400">
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
 																{index + 1}
-															</th>
-															<th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+															</td>
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
 																{user?.name}
-															</th>
+															</td>
 															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
 																{user?.address}
 															</td>
 															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-																{user?.gender === "p" ? "Perempuan" : "Laki-laki"}
+																{user?.gender === "l" ? "Pria" : "Wanita"}
 															</td>
 															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
 																{formatDate(user?.born_date, false)}
@@ -120,10 +123,8 @@ const HomePage = () => {
 													);
 												})
 											) : (
-												<tr className="absolute w-[96vw] flex justify-center">
-													<th className="border-t-0 pt-6 px-6 mt-2 text-sm align-middle  border-l-0 border-r-0 whitespace-nowrap  text-left">
-														No data
-													</th>{" "}
+												<tr className="text-right w-full h-20 ">
+													<td colSpan="4">No data</td>
 												</tr>
 											)}
 										</tbody>
@@ -131,20 +132,11 @@ const HomePage = () => {
 								</div>
 							</div>
 						</div>
-						<footer className="relative py-8  mt-40">
-							<div className="container mx-auto px-4">
-								<div className="flex flex-wrap items-center md:justify-between justify-center">
-									<div className="w-full md:w-6/12 px-4 mx-auto text-center">
-										<div className="text-sm text-blueGray-500 font-semibold py-1">
-											CMS ADMIN
-										</div>
-									</div>
-								</div>
-							</div>
-						</footer>
 					</section>
 				</>
 			</main>
+
+			<Footer />
 		</div>
 	);
 };
