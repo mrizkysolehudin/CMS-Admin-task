@@ -3,13 +3,148 @@ import Navbar from "../../components/Global/Navbar";
 import "react-datepicker/dist/react-datepicker.css";
 import axiosClient from "../../helpers/axiosClient";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { formatDate } from "../../utils/formatDate";
 
 const HomePage = () => {
+	const [users, setUsers] = useState([]);
+	const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		getUsers();
+	}, []);
+
+	const getUsers = async () => {
+		setLoading(true);
+		await axiosClient()
+			.get("/user")
+			.then((res) => {
+				setLoading(false);
+				setUsers(res.data.data);
+			})
+			.catch((err) => {
+				setLoading(false);
+				throw err;
+			});
+	};
+
 	return (
 		<div>
 			<Navbar />
-			<h1 className="text-3xl font-bold underline">Hello world!</h1>
+
+			<main>
+				<>
+					<section className="relative pt-16 bg-blueGray-50">
+						<div className="w-full  px-4 min-h-[44dvh]">
+							<div
+								className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded 
+  bg-indigo-900 text-white ">
+								<div className="rounded-t mb-0 px-4 py-3 border-0 ">
+									<div className="flex flex-wrap items-center">
+										<div className="relative w-full px-4 max-w-full flex-grow flex-1 ">
+											<h3 className="font-semibold text-lg text-white">CMS Admin </h3>
+										</div>
+									</div>
+								</div>
+								<div className="block w-full overflow-x-auto ">
+									<table className="items-center w-full bg-transparent border-collapse">
+										<thead className="">
+											<tr>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													No.
+												</th>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													Nama
+												</th>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													Alamat
+												</th>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													Jenis kelamin
+												</th>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													Tanggal lahir
+												</th>
+												<th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left bg-indigo-800 text-indigo-300 border-indigo-700">
+													Tanggal input
+												</th>
+												<th className="text-center align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold  bg-indigo-800 text-indigo-300 border-indigo-700">
+													Actions
+												</th>
+											</tr>
+										</thead>
+
+										<tbody className={`relative ${users ? "h-[14vh]" : ""}`}>
+											{loading ? (
+												"loading"
+											) : users?.length > 0 ? (
+												users?.map((user, index) => {
+													return (
+														<tr className="hover:bg-indigo-400/90 bg-indigo-400">
+															<th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+																{index + 1}
+															</th>
+															<th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+																{user?.name}
+															</th>
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+																{user?.address}
+															</td>
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+																{user?.gender === "p" ? "Perempuan" : "Laki-laki"}
+															</td>
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+																{formatDate(user?.born_date, false)}
+															</td>
+															<td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+																{formatDate(user?.created_at)}
+															</td>
+															<td className="relative flex justify-center  border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-7 text-right">
+																<div className=" py-1 px-3 gap-x-3 flex text-sm">
+																	<Link
+																		to={`/user/${user?.id}`}
+																		className=" bg-green-700 hover:bg-green-800 rounded-full w-7 h-6 flex justify-center items-center">
+																		<i className="fas fa-eye text-gray-100" />
+																	</Link>
+																	<Link
+																		to={`/user/${user?.id}/edit`}
+																		className=" bg-yellow-700 hover:bg-yellow-800 flex items-center justify-center rounded-full w-6 h-6">
+																		<i className="fas fa-pen text-gray-100 text-xs" />
+																	</Link>
+																	<button className=" bg-red-500 hover:bg-red-600 rounded-full w-6 h-6 flex justify-center items-center">
+																		<i className="fas fa-trash text-gray-100 text-xs" />
+																	</button>
+																</div>
+															</td>
+														</tr>
+													);
+												})
+											) : (
+												<tr className="absolute w-[96vw] flex justify-center">
+													<th className="border-t-0 pt-6 px-6 mt-2 text-sm align-middle  border-l-0 border-r-0 whitespace-nowrap  text-left">
+														No data
+													</th>{" "}
+												</tr>
+											)}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<footer className="relative py-8  mt-40">
+							<div className="container mx-auto px-4">
+								<div className="flex flex-wrap items-center md:justify-between justify-center">
+									<div className="w-full md:w-6/12 px-4 mx-auto text-center">
+										<div className="text-sm text-blueGray-500 font-semibold py-1">
+											CMS ADMIN
+										</div>
+									</div>
+								</div>
+							</div>
+						</footer>
+					</section>
+				</>
+			</main>
 		</div>
 	);
 };

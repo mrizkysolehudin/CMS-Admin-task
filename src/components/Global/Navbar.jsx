@@ -1,16 +1,11 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axiosClient from "../../helpers/axiosClient";
 import Swal from "sweetalert2";
 
-const navigation = [
-	{ name: "Dashboard", href: "/", current: true },
-	{ name: "Team", href: "/", current: false },
-	{ name: "Projects", href: "/", current: false },
-	{ name: "Calendar", href: "/", current: false },
-];
+const navigation = [{ name: "Home", href: "/", current: true }];
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -22,8 +17,6 @@ export default function Navbar() {
 	useEffect(() => {
 		getCurrentUser();
 	}, []);
-
-	console.log(currentUser);
 
 	const handleLogout = () => {
 		localStorage.clear();

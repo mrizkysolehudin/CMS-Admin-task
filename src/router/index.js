@@ -5,6 +5,8 @@ import LoginPage from "../pages/Login";
 import RegisterPage from "../pages/Register";
 import PrivateRoute from "../components/Global/PrivateRoute";
 import NotFoundPage from "../pages/NotFound";
+import UserDetailsPage from "../pages/User/UserDetails";
+import EditUserPage from "../pages/User/EditUser";
 
 const Router = () => {
 	return (
@@ -21,6 +23,8 @@ const Router = () => {
 				{/* private routes */}
 				<Route element={<PrivateRoute />}>
 					<Route path="/" element={<HomePage />} />
+					<Route path="/user/:id" element={<UserDetailsPage />} />
+					<Route path="/user/:id/edit" element={<EditUserPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
