@@ -4,6 +4,7 @@ import axiosClient from "../../helpers/axiosClient";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
 import Footer from "../../components/Global/Footer";
+import Swal from "sweetalert2";
 
 const HomePage = () => {
 	const [users, setUsers] = useState([]);
@@ -25,6 +26,38 @@ const HomePage = () => {
 				setLoading(false);
 				throw err;
 			});
+	};
+
+	const handleDelete = async (id) => {
+		const result = await Swal.fire({
+			title: "Delete Confirmation",
+			text: "Are you sure you want to delete this item?",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Delete",
+			cancelButtonText: "Cancel",
+			confirmButtonColor: "#d33",
+		});
+
+		if (result.isConfirmed) {
+			axiosClient()
+				.delete(`/user/${id}`)
+				.then(() => {
+					Swal.fire({
+						text: "Delete success.",
+						icon: "success",
+					});
+					getUsers();
+				})
+				.catch(() => {
+					Swal.fire({
+						text: "Delete error.",
+						icon: "error",
+					});
+				});
+		} else if (result.dismiss === Swal.DismissReason.cancel) {
+			return;
+		}
 	};
 
 	return (
@@ -110,7 +143,9 @@ const HomePage = () => {
 																		className=" bg-yellow-700 hover:bg-yellow-800 flex items-center justify-center rounded-full w-6 h-6">
 																		<i className="fas fa-pen text-gray-100 text-xs" />
 																	</Link>
-																	<button className=" bg-red-500 hover:bg-red-600 rounded-full w-6 h-6 flex justify-center items-center">
+																	<button
+																		onClick={() => handleDelete(user.id)}
+																		className=" bg-red-500 hover:bg-red-600 rounded-full w-6 h-6 flex justify-center items-center">
 																		<i className="fas fa-trash text-gray-100 text-xs" />
 																	</button>
 																</div>
