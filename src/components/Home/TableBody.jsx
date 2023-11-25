@@ -1,7 +1,7 @@
 import React from "react";
 import Alert from "../Global/Alert";
 import { formatDate } from "../../utils/formatDate";
-import { Link } from "react-router-dom";
+import ButtonIcon from "./ButtonIcon";
 
 const TableBody = ({ loading, users, handleDelete }) => {
 	return (
@@ -32,21 +32,23 @@ const TableBody = ({ loading, users, handleDelete }) => {
 							</td>
 							<td className="relative flex justify-center  border-t-0 px-6 border-l-0 border-r-0 text-xs whitespace-nowrap p-7 text-right">
 								<div className=" py-1 px-3 gap-x-3 flex text-sm">
-									<Link
+									<ButtonIcon
+										type={"link"}
 										to={`/user/${user?.id}`}
-										className=" bg-green-700 hover:bg-green-800 rounded-full w-7 h-6 flex justify-center items-center">
-										<i className="fas fa-eye text-gray-100" />
-									</Link>
-									<Link
+										className={"bg-green-700 hover:bg-green-800"}
+										icon={<i className="fas fa-eye text-gray-100" />}
+									/>
+									<ButtonIcon
+										type={"link"}
 										to={`/user/${user?.id}/edit`}
-										className=" bg-yellow-700 hover:bg-yellow-800 flex items-center justify-center rounded-full w-6 h-6">
-										<i className="fas fa-pen text-gray-100 text-xs" />
-									</Link>
-									<button
+										className={"bg-yellow-700 hover:bg-yellow-800"}
+										icon={<i className="fas fa-pen text-gray-100 text-xs" />}
+									/>
+									<ButtonIcon
 										onClick={() => handleDelete(user.id)}
-										className=" bg-red-500 hover:bg-red-600 rounded-full w-6 h-6 flex justify-center items-center">
-										<i className="fas fa-trash text-gray-100 text-xs" />
-									</button>
+										className={"bg-red-500 hover:bg-red-600 "}
+										icon={<i className="fas fa-trash text-gray-100 text-xs" />}
+									/>
 								</div>
 							</td>
 						</tr>
