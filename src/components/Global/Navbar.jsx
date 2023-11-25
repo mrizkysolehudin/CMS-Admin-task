@@ -12,6 +12,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+	// eslint-disable-next-line
 	const [currentUser, setCurrentUser] = useState(null);
 
 	useEffect(() => {

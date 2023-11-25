@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Global/Navbar";
-import "react-datepicker/dist/react-datepicker.css";
 import axiosClient from "../../helpers/axiosClient";
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../utils/formatDate";
 import Footer from "../../components/Global/Footer";
@@ -37,9 +35,7 @@ const HomePage = () => {
 				<>
 					<section className="relative pt-16 bg-blueGray-50">
 						<div className="w-full  px-4 min-h-[44dvh]">
-							<div
-								className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded 
-  bg-indigo-900 text-white ">
+							<div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-indigo-900 text-white ">
 								<div className="rounded-t mb-0 px-4 py-3 border-0 ">
 									<div className="flex flex-wrap items-center">
 										<div className="relative w-full px-4 max-w-full flex-grow flex-1 ">
