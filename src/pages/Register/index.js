@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthSVG from "../../assets/images/AuthSVG";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosClient from "../../helpers/axiosClient";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
+	const navigate = useNavigate();
+
+	const [data, setData] = useState(null);
+
+	const handleChange = (e) => {
+		setData({
+			...data,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleRegister = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await axiosClient().post("/auth/register", data);
+
+			if (response.data) {
+				navigate("/login");
+
+				Swal.fire({
+					text: "Register success.",
+					icon: "success",
+				});
+			}
+		} catch (error) {
+			Swal.fire({
+				text: "Register error.",
+				icon: "error",
+			});
+		}
+	};
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+
+		if (token) {
+			navigate("/");
+		}
+	}, [navigate]);
+
 	return (
 		<div className="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
 			<div
@@ -12,7 +54,9 @@ const RegisterPage = () => {
 					<div className="hidden md:block w-1/2 bg-indigo-500 py-10 px-10">
 						<AuthSVG />
 					</div>
-					<div className="w-full md:w-1/2 py-10 px-5 md:px-10">
+					<form
+						onSubmit={handleRegister}
+						className="w-full md:w-1/2 py-10 px-5 md:px-10">
 						<div className="text-center mb-10">
 							<h1 className="font-bold text-3xl text-gray-900">Register</h1>
 							<p>Enter your information to register</p>
@@ -28,7 +72,9 @@ const RegisterPage = () => {
 											<i className="mdi mdi-email-outline text-gray-400 text-lg" />
 										</div>
 										<input
+											name="name"
 											type="name"
+											onChange={handleChange}
 											className="w-full -ml-10 pl-4 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
 											placeholder="Jono@example.com"
 										/>
@@ -45,7 +91,9 @@ const RegisterPage = () => {
 											<i className="mdi mdi-email-outline text-gray-400 text-lg" />
 										</div>
 										<input
+											name="email"
 											type="email"
+											onChange={handleChange}
 											className="w-full -ml-10 pl-4 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
 											placeholder="jono@example.com"
 										/>
@@ -62,7 +110,9 @@ const RegisterPage = () => {
 											<i className="mdi mdi-lock-outline text-gray-400 text-lg" />
 										</div>
 										<input
+											name="password"
 											type="password"
+											onChange={handleChange}
 											className="w-full -ml-10 pl-4 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
 											placeholder="************"
 										/>
@@ -71,7 +121,9 @@ const RegisterPage = () => {
 							</div>
 							<div className="flex -mx-3">
 								<div className="w-full px-3 mb-5">
-									<button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+									<button
+										type="submit"
+										className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
 										Register Now
 									</button>
 								</div>
@@ -83,7 +135,7 @@ const RegisterPage = () => {
 								</Link>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>

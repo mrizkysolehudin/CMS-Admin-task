@@ -18,7 +18,7 @@ const handleError = (error, navigate) => {
 	}
 };
 
-const axiosClient = (navigate) => {
+const axiosClient = (navigate = () => {}) => {
 	const createAxiosClient = axios.create({
 		baseURL: baseUrl,
 	});

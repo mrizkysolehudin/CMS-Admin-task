@@ -1,8 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AuthSVG from "../../assets/images/AuthSVG";
+import Swal from "sweetalert2";
+import axiosClient from "../../helpers/axiosClient";
 
 const LoginPage = () => {
+	const navigate = useNavigate();
+
+	const [data, setData] = useState(null);
+
+	const handleChange = (e) => {
+		setData({
+			...data,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await axiosClient().post("/auth/login", data);
+			if (response.data) {
+				navigate("/");
+				localStorage.setItem("token", response.data.token);
+
+				Swal.fire({
+					text: "Login success.",
+					icon: "success",
+				});
+			}
+		} catch (error) {
+			Swal.fire({
+				text: "Login error.",
+				icon: "error",
+			});
+		}
+	};
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+
+		if (token) {
+			navigate("/");
+		}
+	}, [navigate]);
+
 	return (
 		<div>
 			<div className="lg:flex">
@@ -21,14 +63,16 @@ const LoginPage = () => {
 							Log in
 						</h2>
 						<div className="mt-12">
-							<form>
+							<form onSubmit={handleLogin}>
 								<div>
 									<div className="text-sm font-bold text-gray-700 tracking-wide">
 										Email Address
 									</div>
 									<input
 										className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-										type=""
+										name="email"
+										type="email"
+										onChange={handleChange}
 										placeholder="jono@gmail.com"
 									/>
 								</div>
@@ -40,12 +84,15 @@ const LoginPage = () => {
 									</div>
 									<input
 										className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-										type=""
+										name="password"
+										type="password"
+										onChange={handleChange}
 										placeholder="Enter your password"
 									/>
 								</div>
 								<div className="mt-10">
 									<button
+										type="submit"
 										className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
                           font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
                           shadow-lg">
