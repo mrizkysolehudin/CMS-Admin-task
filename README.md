@@ -53,7 +53,7 @@ Start the project
 | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | ![Home](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Home.png) | ![User Details](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/User%20Details.png) |
 
-| Add User Page                                                                                           | User Details Page                                                                                         |
+| Add User Page                                                                                           | Edit User Page                                                                                            |
 | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | ![Add User](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Add%20User.png) | ![Edit User](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Edit%20User.png) |
 
