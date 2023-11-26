@@ -55,7 +55,7 @@ const EditUserPage = () => {
 			});
 	};
 
-	const handleUpdate = async (e) => {
+	const handleUpdateUser = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 
@@ -111,7 +111,7 @@ const EditUserPage = () => {
 						</h2>
 					</div>
 					<div className=" bg-white max-w-md rounded overflow-hidden shadow-xl p-5">
-						<form className="space-y-4" onSubmit={handleUpdate}>
+						<form className="space-y-4" onSubmit={handleUpdateUser}>
 							<div className="rounded-md shadow-sm -space-y-px">
 								<div className="grid gap-6">
 									<Input

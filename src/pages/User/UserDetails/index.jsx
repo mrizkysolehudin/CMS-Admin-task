@@ -12,10 +12,10 @@ const UserDetailsPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
-		getUsers(id);
+		getUserById(id);
 	}, [id]);
 
-	const getUsers = async (id) => {
+	const getUserById = async (id) => {
 		setIsLoading(true);
 		await axiosClient()
 			.get(`/user/${id}`)

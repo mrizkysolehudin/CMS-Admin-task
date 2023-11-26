@@ -19,6 +19,13 @@ const LoginPage = () => {
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		try {
+			if (!data?.email.trim() || !data?.password.trim()) {
+				return Swal.fire({
+					text: "Name and Password is required",
+					icon: "error",
+				});
+			}
+
 			const response = await axiosClient().post("/auth/login", data);
 			if (response.data) {
 				navigate("/");
@@ -31,7 +38,7 @@ const LoginPage = () => {
 			}
 		} catch (error) {
 			Swal.fire({
-				text: "Login error.",
+				text: "Wrong email or password.",
 				icon: "error",
 			});
 		}
