@@ -43,6 +43,20 @@ Start the project
   npm start
 ```
 
+## Screenshots
+
+| Register Page                                                                                         | Login Page                                                                                      |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| ![Register](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Register.png) | ![Login](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Login.png) |
+
+| Home Page                                                                                     | User Details Page                                                                                               |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| ![Home](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Home.png) | ![User Details](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/User%20Details.png) |
+
+| Add User Page                                                                                           | User Details Page                                                                                         |
+| ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| ![Add User](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Add%20User.png) | ![Edit User](https://github.com/mrizkysolehudin/CMS-Admin-task/blob/master/src/assets/ss/Edit%20User.png) |
+
 ## Author
 
 💻 [Muchammad Rizky Solehudin](https://github.com/mrizkysolehudin)
