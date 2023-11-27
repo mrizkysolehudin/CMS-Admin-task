@@ -16,7 +16,7 @@ REACT_APP_API_URL=
 Clone the project
 
 ```bash
-  git clone https://github.com/mrizkysolehudin/taskSanber cmsadmin-app
+  git clone https://github.com/mrizkysolehudin/CMS-Admin-task cmsadmin-app
 ```
 
 Go to the project directory
